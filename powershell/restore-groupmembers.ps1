@@ -1,10 +1,13 @@
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+
 $global_catalog = Get-ADDomainController -Discover -Service GlobalCatalog
 
 $server = "$($global_catalog.Name):3268"
 
 $csv_file = "backup_2025-08-13_10-00-00.csv"
 
-$csv_import_table = Import-Csv -Path $csv_file
+$csv_import_table = Import-Csv -Path $csv_file -Encoding UTF8
 
 Write-Host "Restoring $($csv_import_table.Count) members from $csv_file..."
 

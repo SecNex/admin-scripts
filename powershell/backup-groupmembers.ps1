@@ -1,3 +1,6 @@
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+
 $global_catalog = Get-ADDomainController -Discover -Service GlobalCatalog
 
 $server = "$($global_catalog.Name):3268"
@@ -34,7 +37,7 @@ foreach ($group in $groups) {
 }
 
 if ($csv_export_table.Count -gt 0) {
-    $csv_export_table | Export-Csv -Path $csv_file -NoTypeInformation
+    $csv_export_table | Export-Csv -Path $csv_file -NoTypeInformation -Encoding UTF8
     Write-Host "Backup completed successfully. Exported $($csv_export_table.Count) members to $csv_file"
 } else {
     Write-Warning "No members found to export"
